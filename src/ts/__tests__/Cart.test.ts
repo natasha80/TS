@@ -68,28 +68,6 @@ test('Метод getTotalCoast должен вернуть корректное 
   expect(cart.getTotalCoast(10)).toBe(4725);
 });
 
-test('Метод deleteItem должен удалить элемент из массива items', () => {
-  const cart = new Cart();
-  const movie = new Movie(
-    1000,
-    'The Avengers',
-    350,
-    2012,
-    'USA',
-    'Avengers Assemble!',
-    ['фантастика', 'боевик', 'фэнтези', 'приключения'],
-    '137 мин. / 02:17'
-  );
-  const book = new Book(1001, 'You do not know JS', 'Kyle Simpson', 1000, 500);
-  const album = new MusicAlbum(1002, 'Давай ограбим счастье', 'Taras', 100);
-  cart.add(movie);
-  cart.add(book);
-  cart.add(album);
-  cart.deleteItem(1000);
-  expect(cart.items.length).toBe(2);
-  expect(cart.items).toEqual([book, album]);
-});
-
 test('На товары с isQuantiable = true и с одинаковыми id, не должно быть ограничения по количеству', () => {
   const cart = new Cart();
   const phone1 = new Gadget(2222, 'phone', 120000, 'iPhone 12', true);
@@ -126,15 +104,3 @@ test('У товаров без isQuantiable но с разными id, не до
   expect(cart.items).toEqual([book1, book2, book3]);
 });
 
-test('Удаление одинаковых товаров должно быть корректным', () => {
-  const cart = new Cart();
-  const phone1 = new Gadget(2222, 'phone', 120000, 'iPhone 12', true);
-  const phone2 = new Gadget(2222, 'phone', 120000, 'iPhone 12', true);
-  const phone3 = new Gadget(2222, 'phone', 120000, 'iPhone 12', true);
-  cart.add(phone1);
-  cart.add(phone2);
-  cart.add(phone3);
-  cart.deleteItem(1001);
-  expect(cart.items.length).toBe(2);
-  expect(cart.items).toEqual([phone2, phone3]);
-});

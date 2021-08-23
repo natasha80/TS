@@ -10,11 +10,11 @@ export default class Cart {
     }
 
     getItem(id: number): Buyable | undefined {
-      return this.items.find((elem) => elem.id === id);
+      return this.items.find((elem: Buyable) => elem.id === id);
     }
 
     getTotalCoast(discount?: number): number {
-      const totalSum = this.items.reduce((acc, prev) => acc + prev.price, 0);
+      const totalSum = this.items.reduce((acc: number, prev: Buyable) => acc + prev.price, 0);
       if (!discount) {
         return totalSum;
       }
@@ -22,8 +22,7 @@ export default class Cart {
     }
 
     deleteItem(id: number): void {
-      const idx = this.items.findIndex((elem) => elem.id === id);
-      this._items.splice(idx, 1);
+      this._items = this._items.filter((element: Buyable) => element.id === id);
     }
 
     get items(): Buyable[] {
